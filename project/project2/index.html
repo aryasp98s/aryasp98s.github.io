@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Aryasb Shenavari" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>R Notebook</title>
+    <meta name="generator" content="Hugo 0.83.1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project2/">R Notebook</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
+<p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Ctrl+Shift+Enter</em>.</p>
+<p>#0-SETTING UP DATA; COMBINING TWO DATASETS</p>
+<pre class="r"><code>#0-SETTING UP DATA; COMBINING TWO DATASETS 
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.0.4     ✓ dplyr   1.0.2
+## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(dplyr)
+library(fivethirtyeight)</code></pre>
+<pre><code>## Some larger datasets need to be installed separately, like senators and
+## house_district_forecast. To install these, we recommend you install the
+## fivethirtyeightdata package by running:
+## install.packages(&#39;fivethirtyeightdata&#39;, repos =
+## &#39;https://fivethirtyeightdata.github.io/drat/&#39;, type = &#39;source&#39;)</code></pre>
+<pre class="r"><code>data(drinks)
+data(cousin_marriage)
+cousin_marriage</code></pre>
+<pre><code>## # A tibble: 70 x 2
+##    country      percent
+##    &lt;chr&gt;          &lt;dbl&gt;
+##  1 Burkina Faso    65.8
+##  2 Kuwait          51.7
+##  3 Nigeria         51.2
+##  4 Pakistan        51  
+##  5 Sudan           50.4
+##  6 Kyrgyzstan      45.2
+##  7 Qatar           44.5
+##  8 Bahrain         44.4
+##  9 Saudi Arabia    38.4
+## 10 Tanzania        37.8
+## # … with 60 more rows</code></pre>
+<pre class="r"><code>dranks &lt;- full_join(cousin_marriage, drinks, by=&quot;country&quot;)
+dranks2 &lt;- dranks %&gt;% na.omit 
+dranks2 %&gt;% mutate(total_serving_of_alcohol = beer_servings+wine_servings+spirit_servings)</code></pre>
+<pre><code>## # A tibble: 67 x 7
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;     &lt;dbl&gt;         &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin…    65.8            25               7             7              4.3
+##  2 Kuwait     51.7             0               0             0              0  
+##  3 Nigeria    51.2            42               5             2              9.1
+##  4 Pakist…    51               0               0             0              0  
+##  5 Sudan      50.4             8              13             0              1.7
+##  6 Kyrgyz…    45.2            31              97             6              2.4
+##  7 Qatar      44.5             1              42             7              0.9
+##  8 Bahrain    44.4            42              63             7              2  
+##  9 Saudi …    38.4             0               5             0              0.1
+## 10 Tanzan…    37.8            36               6             1              5.7
+## # … with 57 more rows, and 1 more variable: total_serving_of_alcohol &lt;int&gt;</code></pre>
+<pre class="r"><code>dranks3 &lt;- dranks2 %&gt;% mutate(total_serving_of_alcohol = beer_servings+wine_servings+spirit_servings)
+dranks3 %&gt;% summarize(median(total_serving_of_alcohol))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   `median(total_serving_of_alcohol)`
+##                                &lt;int&gt;
+## 1                                141</code></pre>
+<pre class="r"><code>dranks4&lt;-dranks3 %&gt;%mutate(total_serving_of_alcohol = ntile(total_serving_of_alcohol,n = 2), total_serving_of_alcohol=recode(total_serving_of_alcohol, &quot;low&quot;, &quot;high&quot;))
+dranks4</code></pre>
+<pre><code>## # A tibble: 67 x 7
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;     &lt;dbl&gt;         &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin…    65.8            25               7             7              4.3
+##  2 Kuwait     51.7             0               0             0              0  
+##  3 Nigeria    51.2            42               5             2              9.1
+##  4 Pakist…    51               0               0             0              0  
+##  5 Sudan      50.4             8              13             0              1.7
+##  6 Kyrgyz…    45.2            31              97             6              2.4
+##  7 Qatar      44.5             1              42             7              0.9
+##  8 Bahrain    44.4            42              63             7              2  
+##  9 Saudi …    38.4             0               5             0              0.1
+## 10 Tanzan…    37.8            36               6             1              5.7
+## # … with 57 more rows, and 1 more variable: total_serving_of_alcohol &lt;chr&gt;</code></pre>
+<pre class="r"><code>dranks5&lt;-dranks4 %&gt;%mutate(percent = ntile(percent,n = 2), percent=recode(percent, &quot;low&quot;, &quot;high&quot;))
+dranks5</code></pre>
+<pre><code>## # A tibble: 67 x 7
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;   &lt;chr&gt;           &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin… high               25               7             7              4.3
+##  2 Kuwait  high                0               0             0              0  
+##  3 Nigeria high               42               5             2              9.1
+##  4 Pakist… high                0               0             0              0  
+##  5 Sudan   high                8              13             0              1.7
+##  6 Kyrgyz… high               31              97             6              2.4
+##  7 Qatar   high                1              42             7              0.9
+##  8 Bahrain high               42              63             7              2  
+##  9 Saudi … high                0               5             0              0.1
+## 10 Tanzan… high               36               6             1              5.7
+## # … with 57 more rows, and 1 more variable: total_serving_of_alcohol &lt;chr&gt;</code></pre>
+<p><em>I am working with a dataset renamed as ‘dranks’, which is originally two data sets, ‘drinks’ and ‘cousin_marriage’, that I have combined together. The drinks data set contains information on the total servings of different alcohols and the total liters of pure alcohol consumed by different countries. All of these are numeric variables and are presented as ‘beer_servings’ which measures the average number of beer servings per person in each country, ‘wine_servings’ which measures the average number of wine servings per person in each country, ‘spirit_servings’ which measures the average number of spirit servings per person in each country, ‘total_liters_of_pure_alcohol’ which measures the average total liters of pure alcohol per person in each country. I have also created the a new categorical variable, with two categories (high and low), named ‘total_serving_of_alcohol’ which measures the total servings of alcohol per person in each country.The cousin_marriage data set contains information on the percentage of people in the country that engage in some form of cousin marriage. The percentage of cousin marriages per country is given by the numeric variable ‘percent’, which I have also converted to a categorical variable with two categories (high and low). These data sets were acquired from the ‘fivethirtyeight’ package. Overall, there is a total number of 67 observations for each variable.</em></p>
+<p>#1-MANOVA, ANOVAs, POST-HOC T-TESTs</p>
+<pre class="r"><code>#1-MANOVA, ANOVAs, POST-HOC T-TESTs
+man1&lt;-manova(cbind(beer_servings, spirit_servings, wine_servings)~percent,dranks4)
+summary(man1)</code></pre>
+<pre><code>##           Df  Pillai approx F num Df den Df    Pr(&gt;F)    
+## percent    1 0.56531    27.31      3     63 1.952e-11 ***
+## Residuals 65                                             
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>summary.aov(man1)</code></pre>
+<pre><code>##  Response beer_servings :
+##             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## percent      1 368672  368672  66.629 1.501e-11 ***
+## Residuals   65 359656    5533                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##  Response spirit_servings :
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## percent      1  69197   69197  26.986 2.21e-06 ***
+## Residuals   65 166673    2564                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##  Response wine_servings :
+##             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## percent      1 157689  157689  23.017 9.764e-06 ***
+## Residuals   65 445314    6851                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>pairwise.t.test(dranks5$beer_servings,dranks5$percent, p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dranks5$beer_servings and dranks5$percent 
+## 
+##     high   
+## low 3.1e-15
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>pairwise.t.test(dranks5$spirit_servings,dranks5$percent, p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dranks5$spirit_servings and dranks5$percent 
+## 
+##     high   
+## low 6.3e-06
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>pairwise.t.test(dranks5$wine_servings,dranks5$percent, p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dranks5$wine_servings and dranks5$percent 
+## 
+##     high   
+## low 1.5e-06
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>type1error&lt;- 1-(0.95^7)
+type1error </code></pre>
+<pre><code>## [1] 0.3016627</code></pre>
+<pre class="r"><code>bonferroni &lt;- 0.05/7
+bonferroni </code></pre>
+<pre><code>## [1] 0.007142857</code></pre>
+<p><em>A total of 7 tests were carried out. Specifically, one MANOVA, three ANOVAs, and 3 post-hoc T-tests. The probability of at least one type error (if unadjusted) is 0.3016627. The bonferroni correction adjusted the significance level to 0.007142857. Despite this change all seven tests had p-values below this significance level still and therefore it can still be concluded that significant difference does exist.</em>
+#Briefly discuss some of the MANOVA assumptions and whether or not they are likely to have been met here</p>
+<p>#2-RANDOMIZATION TEST: MEAN DIFFERENCE</p>
+<pre class="r"><code>#2-RANDOMIZATION TEST: MEAN DIFFERENCE
+dranks5 %&gt;% na.omit</code></pre>
+<pre><code>## # A tibble: 67 x 7
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;   &lt;chr&gt;           &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin… high               25               7             7              4.3
+##  2 Kuwait  high                0               0             0              0  
+##  3 Nigeria high               42               5             2              9.1
+##  4 Pakist… high                0               0             0              0  
+##  5 Sudan   high                8              13             0              1.7
+##  6 Kyrgyz… high               31              97             6              2.4
+##  7 Qatar   high                1              42             7              0.9
+##  8 Bahrain high               42              63             7              2  
+##  9 Saudi … high                0               5             0              0.1
+## 10 Tanzan… high               36               6             1              5.7
+## # … with 57 more rows, and 1 more variable: total_serving_of_alcohol &lt;chr&gt;</code></pre>
+<pre class="r"><code>set.seed(348)
+rand_mean&lt;-vector()
+for(i in 1:5000){
+new&lt;-data.frame(litres=sample(dranks5$total_litres_of_pure_alcohol),incest=dranks5$percent)
+rand_mean[i]&lt;-mean(new[new$incest==&quot;high&quot;,]$litres)-mean(new[new$incest ==&quot;low&quot;,]$litres)}
+
+mean(new[new$incest==&quot;high&quot;,]$litres)-mean(new[new$incest==&quot;low&quot;,]$litres)</code></pre>
+<pre><code>## [1] 2.573262</code></pre>
+<pre class="r"><code>hist(rand_mean,main=&quot;&quot;,ylab=&quot;&quot;, breaks =30); abline(v = c(-2.573262, 2.573262),col=&quot;red&quot;)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>mean(abs(rand_mean)&gt; 2.573262)</code></pre>
+<pre><code>## [1] 0.0044</code></pre>
+<p><em>The null hypothesis is that the mean total litres of alcohol consumed by people in a country is the same for a country with high percentage of cousin marriage vs. for a country with low percentage of cousin marriage, while the alternative hypothesis is that the mean total litres of alcohol consumed by people in a country is different for a country with high percentage of cousin marriage vs. for a country with low percentage of cousin marriage. The results of the randomization test show that the resulting p-value is 0.0044, which is below the significance level of 0.05. Therefore the null hypothesis can be rejected and it can be concluded that the alternative hypothesis is accepted. </em></p>
+<p>#3-LINEAR REGRESSION MODEL WITH INTERACTION</p>
+<pre class="r"><code>#3 - HW#7-2.1
+library(lmtest)</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre class="r"><code>library(sandwich)
+dranks4</code></pre>
+<pre><code>## # A tibble: 67 x 7
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;     &lt;dbl&gt;         &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin…    65.8            25               7             7              4.3
+##  2 Kuwait     51.7             0               0             0              0  
+##  3 Nigeria    51.2            42               5             2              9.1
+##  4 Pakist…    51               0               0             0              0  
+##  5 Sudan      50.4             8              13             0              1.7
+##  6 Kyrgyz…    45.2            31              97             6              2.4
+##  7 Qatar      44.5             1              42             7              0.9
+##  8 Bahrain    44.4            42              63             7              2  
+##  9 Saudi …    38.4             0               5             0              0.1
+## 10 Tanzan…    37.8            36               6             1              5.7
+## # … with 57 more rows, and 1 more variable: total_serving_of_alcohol &lt;chr&gt;</code></pre>
+<pre class="r"><code>dranks4$total_litres_of_pure_alcohol_c &lt;- dranks4$total_litres_of_pure_alcohol - mean(dranks4$total_litres_of_pure_alcohol, na.rm = T)
+fit&lt;-lm(percent~total_litres_of_pure_alcohol_c*total_serving_of_alcohol,data=dranks4)
+summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = percent ~ total_litres_of_pure_alcohol_c * total_serving_of_alcohol, 
+##     data = dranks4)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -27.659  -4.090  -1.180   2.915  28.986 
+## 
+## Coefficients:
+##                                                            Estimate Std. Error
+## (Intercept)                                                  5.5799     2.8289
+## total_litres_of_pure_alcohol_c                              -0.9049     0.6936
+## total_serving_of_alcohollow                                 31.9592     4.4934
+## total_litres_of_pure_alcohol_c:total_serving_of_alcohollow   3.1839     1.2178
+##                                                            t value Pr(&gt;|t|)    
+## (Intercept)                                                  1.972   0.0529 .  
+## total_litres_of_pure_alcohol_c                              -1.305   0.1968    
+## total_serving_of_alcohollow                                  7.112 1.27e-09 ***
+## total_litres_of_pure_alcohol_c:total_serving_of_alcohollow   2.615   0.0112 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.81 on 63 degrees of freedom
+## Multiple R-squared:  0.654,  Adjusted R-squared:  0.6375 
+## F-statistic: 39.69 on 3 and 63 DF,  p-value: 1.581e-14</code></pre>
+<pre class="r"><code>coeftest(fit, vcov=vcovHC(fit))############################COEF issue when knitting </code></pre>
+<pre><code>## 
+## t test of coefficients:
+## 
+##                                                            Estimate Std. Error
+## (Intercept)                                                 5.57986    3.02883
+## total_litres_of_pure_alcohol_c                             -0.90490    0.64902
+## total_serving_of_alcohollow                                31.95918    5.23758
+## total_litres_of_pure_alcohol_c:total_serving_of_alcohollow  3.18395    1.28830
+##                                                            t value  Pr(&gt;|t|)
+## (Intercept)                                                 1.8422   0.07015
+## total_litres_of_pure_alcohol_c                             -1.3943   0.16814
+## total_serving_of_alcohollow                                 6.1019 7.117e-08
+## total_litres_of_pure_alcohol_c:total_serving_of_alcohollow  2.4714   0.01617
+##                                                               
+## (Intercept)                                                .  
+## total_litres_of_pure_alcohol_c                                
+## total_serving_of_alcohollow                                ***
+## total_litres_of_pure_alcohol_c:total_serving_of_alcohollow *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>dranks4 %&gt;% select(percent, total_litres_of_pure_alcohol_c, total_serving_of_alcohol) %&gt;% na.omit %&gt;% ggplot(aes(total_litres_of_pure_alcohol_c, percent, color=total_serving_of_alcohol)) + 
+geom_point()+geom_smooth(method=&quot;lm&quot;) + geom_vline(xintercept=mean(dranks4$total_litres_of_pure_alcohol_c,na.rm=T),lty=2)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>resid&lt;-fit$residuals
+fitvals&lt;-fit$fitted.values
+ggplot()+geom_point(aes(fitvals,resid))+geom_hline(yintercept=0, color=&#39;red&#39;)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>ggplot()+geom_histogram(aes(resid), bins=20)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+<pre class="r"><code>ggplot()+geom_qq(aes(sample=resid))+geom_qq_line(aes(sample=resid))</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-4.png" width="672" />
+<em>The intercept means that the Mean/predicted percent of cousin marriage for countries that consume high total servings of alcohol per person and with zero total_litres_of_pure_alcohol_c per person consumed is 5.57986.</em></p>
+<p><em>total_litres_of_pure_alcohol_c means that for every 1-unit increase in total_litres_of_pure_alcohol_c, predicted percentage of cousin marriage goes down 0.90490 for this group.</em></p>
+<p><em>total_serving_of_alcohollow means that low total serving of alcohol countries with zero total_litres_of_pure_alcohol_c per person have predicted percentage of cousin marriage that is 31.95918 greater than countries with high total serving of alcohol per person with zero percentage of cousin marriage.</em></p>
+<p><em>total_litres_of_pure_alcohol_c:total_serving_of_alcohollow means that the slope of percentage of cousin marriage on total_litres_of_pure_alcohol_c for countries with low total serving of alcohol per person is 3.18395 greater than for countries with high total serving of alcohol per person. </em></p>
+<p>What proportion of the variation in the outcome does your model explain? (4)
+####ASK ABOUT THIS##########!!!!WHAT DOES THIS MEAN</p>
+<p>Check assumptions of linearity, normality, and homoskedasticity either graphically or using a hypothesis test (5)
+<em>The assumptions for normality, linearity, and homoskedasticity are not met, as shown by the graphs.</em>
+###are these correct?</p>
+<p>Regardless, recompute regression results with robust standard errors via coeftest(…, vcov=vcovHC(…)). Discuss significance of results, including any changes from before/after robust SEs if applicable.<em>The intercept and otal_litres_of_pure_alcohol_c are not signigicant as they have p-values above the significance level of 0.05. The total_serving_of_alcohollow and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow are signicant because they have p-values below the significance level of 0.05. The standard errors remained practically … what should I explain them </em>
+###what does it mean describe significant of resutls?</p>
+<p>#4-BOOTSTRAPPING</p>
+<pre class="r"><code>#4-BOOTSTRAPPING
+samp_distn &lt;- replicate(5000, {
+  boot_dat&lt;- dranks4[sample(nrow(dranks4), replace = TRUE),]
+  Reg1&lt;- lm(fit, data=boot_dat)
+  coef(Reg1)
+})
+samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd)</code></pre>
+<pre><code>##   (Intercept) total_litres_of_pure_alcohol_c total_serving_of_alcohollow
+## 1    2.639237                       0.571453                    6.758927
+##   total_litres_of_pure_alcohol_c:total_serving_of_alcohollow
+## 1                                                   1.789869</code></pre>
+<p><em>The SEs in this case were 2.692461, 0.5782093, 6.883675, 1.795046 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The original SEs were 2.8289, 0.6936, 4.4934, 1.2178 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The robust SEs were 3.02883, 0.64902, 5.23758, 1.28830 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. From these results the standard errors changed from the original and robust SEs, but very little. </em></p>
+<p>#how do u describe p-values when I don’t have any for bootstrapping. do I just explain how SE differ from robust ones above?!!!!!
+Discuss any changes you observe in SEs and p-values using these SEs compared to the original SEs and the robust SEs)</p>
+<pre class="r"><code>#5
+library(ggplot2)
+library(plotROC)
+dranks6&lt;-dranks5%&gt;%mutate(y=ifelse(percent==&quot;high&quot;,1,0))
+dranks6</code></pre>
+<pre><code>## # A tibble: 67 x 8
+##    country percent beer_servings spirit_servings wine_servings total_litres_of…
+##    &lt;chr&gt;   &lt;chr&gt;           &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+##  1 Burkin… high               25               7             7              4.3
+##  2 Kuwait  high                0               0             0              0  
+##  3 Nigeria high               42               5             2              9.1
+##  4 Pakist… high                0               0             0              0  
+##  5 Sudan   high                8              13             0              1.7
+##  6 Kyrgyz… high               31              97             6              2.4
+##  7 Qatar   high                1              42             7              0.9
+##  8 Bahrain high               42              63             7              2  
+##  9 Saudi … high                0               5             0              0.1
+## 10 Tanzan… high               36               6             1              5.7
+## # … with 57 more rows, and 2 more variables: total_serving_of_alcohol &lt;chr&gt;,
+## #   y &lt;dbl&gt;</code></pre>
+<pre class="r"><code>ogdranks&lt;- glm(y~total_litres_of_pure_alcohol+wine_servings, data=dranks6, family= &quot;binomial&quot;)
+summary(ogdranks)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ total_litres_of_pure_alcohol + wine_servings, 
+##     family = &quot;binomial&quot;, data = dranks6)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.15611  -0.21534  -0.00441   0.56915   2.27453  
+## 
+## Coefficients:
+##                              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                   2.38128    0.61938   3.845 0.000121 ***
+## total_litres_of_pure_alcohol -0.53280    0.17019  -3.131 0.001745 ** 
+## wine_servings                -0.02064    0.02456  -0.840 0.400784    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 92.867  on 66  degrees of freedom
+## Residual deviance: 47.805  on 64  degrees of freedom
+## AIC: 53.805
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+<pre class="r"><code>exp(coef(ogdranks))</code></pre>
+<pre><code>##                  (Intercept) total_litres_of_pure_alcohol 
+##                   10.8187916                    0.5869573 
+##                wine_servings 
+##                    0.9795759</code></pre>
+<pre class="r"><code>dranks6$probs2&lt;-predict(ogdranks, type = &quot;response&quot;)
+ggplot(dranks6)+geom_roc(aes(d=y, m=probs2))</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>calc_auc(ggplot(dranks6)+geom_roc(aes(d=y, m=probs2)))</code></pre>
+<pre><code>##   PANEL group       AUC
+## 1     1    -1 0.9273619</code></pre>
+<pre class="r"><code>probs2.1&lt;-predict(ogdranks,type=&quot;response&quot;)
+table(predict=as.numeric(probs2.1&gt;.5),truth=dranks6$y)%&gt;%addmargins</code></pre>
+<pre><code>##        truth
+## predict  0  1 Sum
+##     0   26  4  30
+##     1    8 29  37
+##     Sum 34 33  67</code></pre>
+<pre class="r"><code>accuracy &lt;- (26+29)/67
+accuracy</code></pre>
+<pre><code>## [1] 0.8208955</code></pre>
+<pre class="r"><code>sensitivity &lt;-29/33
+sensitivity </code></pre>
+<pre><code>## [1] 0.8787879</code></pre>
+<pre class="r"><code>specificity &lt;-26/34
+specificity</code></pre>
+<pre><code>## [1] 0.7647059</code></pre>
+<pre class="r"><code>precisison &lt;- 29/37
+precisison </code></pre>
+<pre><code>## [1] 0.7837838</code></pre>
+<pre class="r"><code>dranks6$logit&lt;-predict(ogdranks, type=&quot;link&quot;)
+dranks6 %&gt;% mutate(y=as.factor(y)) %&gt;% ggplot()+geom_density(aes(logit, color=y, fill=y), alpha=.4)+geom_vline(xintercept = 0)+xlab(&quot;logit&quot;)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p>Interpret coefficient estimates in context (10)
+<em>The coefficients are intercept, total_litres_of_pure_alcohol, and wine_servings. The intercept value of 10.8187916 means that the odds of high cousin marriage are 10.8187916 when the height is zero the predicted percentage of cousin marriage per country </em>
+###FOR SURE ASK THIS!!!!!</p>
+<p>Compute and discuss the Accuracy, Sensitivity (TPR), Specificity (TNR), Precision (PPV), and AUC of your model (5)
+<em>The sensitivity is 0.8787879 , the specificity is 0.7647059, the precision is 0.7837838, the AUC is 0.9273619 , and the accuracy is 0.8208955. </em></p>
+<p>Generate an ROC curve (plot) and calculate AUC (either manually or with a package); interpret (5)
+<em>The AUC is 0.9273619, which is a high value for AUC. AUC is the the area under the ROC curve. This high AUC value means that the model is very good at distinguishing between countries of high and low cousin marriage percentages. </em></p>
+<pre class="r"><code>#6
+class_diag &lt;- function(probs,truth){ 
+  #CONFUSION MATRIX: CALCULATE ACCURACY, TPR, TNR, PPV 
+  if(is.character(truth)==TRUE) truth&lt;-as.factor(truth) 
+  if(is.numeric(truth)==FALSE &amp; is.logical(truth)==FALSE) truth&lt;-as.numeric(truth)-1 
+  tab&lt;-table(factor(probs&gt;.5,levels=c(&quot;FALSE&quot;,&quot;TRUE&quot;)),factor(truth, levels=c(0,1))) 
+  acc=sum(diag(tab))/sum(tab) 
+  sens=tab[2,2]/colSums(tab)[2] 
+  spec=tab[1,1]/colSums(tab)[1] 
+  ppv=tab[2,2]/rowSums(tab)[2] 
+  
+#CALCULATE EXACT AUC 
+  ord&lt;-order(probs, decreasing=TRUE) 
+  probs &lt;- probs[ord]; truth &lt;- truth[ord] 
+  TPR=cumsum(truth)/max(1,sum(truth)) 
+  FPR=cumsum(!truth)/max(1,sum(!truth)) 
+  dup &lt;-c(probs[-1]&gt;=probs[-length(probs)], FALSE) 
+  TPR &lt;-c(0,TPR[!dup],1); FPR&lt;-c(0,FPR[!dup],1) 
+  n &lt;- length(TPR) 
+  auc &lt;- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n])) 
+  data.frame(acc,sens,spec,ppv,auc) 
+}
+###########################################################Logistic regression and  in-sample classification diagnostics 
+dranks6&lt;-dranks5%&gt;%mutate(y=ifelse(percent==&quot;high&quot;,1,0))
+dranks7&lt;-dranks6%&gt;%dplyr::select(-country,-percent)
+fit &lt;- glm(y~(.), data=dranks7, family =&quot;binomial&quot;)</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>fit</code></pre>
+<pre><code>## 
+## Call:  glm(formula = y ~ (.), family = &quot;binomial&quot;, data = dranks7)
+## 
+## Coefficients:
+##                  (Intercept)                 beer_servings  
+##                      0.34086                      -0.14454  
+##              spirit_servings                 wine_servings  
+##                     -0.04774                      -0.05577  
+## total_litres_of_pure_alcohol   total_serving_of_alcohollow  
+##                      3.58546                       3.74647  
+## 
+## Degrees of Freedom: 66 Total (i.e. Null);  61 Residual
+## Null Deviance:       92.87 
+## Residual Deviance: 16.15     AIC: 28.15</code></pre>
+<pre class="r"><code>probsX &lt;- predict(fit, type =&quot;response&quot;)
+class_diag(probsX, dranks7$y)</code></pre>
+<pre><code>##         acc sens      spec       ppv       auc
+## 1 0.9701493    1 0.9411765 0.9428571 0.9910873</code></pre>
+<pre class="r"><code>table(predict=as.numeric(probsX&gt;.5), truth=dranks7$y) %&gt;% addmargins</code></pre>
+<pre><code>##        truth
+## predict  0  1 Sum
+##     0   32  0  32
+##     1    2 33  35
+##     Sum 34 33  67</code></pre>
+<pre class="r"><code>accuracy &lt;- (32+33)/67
+accuracy</code></pre>
+<pre><code>## [1] 0.9701493</code></pre>
+<pre class="r"><code>sensitivity &lt;-33/33
+sensitivity </code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>specificity &lt;-32/34
+specificity</code></pre>
+<pre><code>## [1] 0.9411765</code></pre>
+<pre class="r"><code>precisison &lt;- 33/35
+precisison </code></pre>
+<pre><code>## [1] 0.9428571</code></pre>
+<pre class="r"><code>###########################################################10-fold CV
+set.seed(1234)
+k=10
+F&lt;-FALSE
+data&lt;- dranks7[sample(nrow(dranks7)),]
+folds&lt;- cut(seq(1:nrow(dranks7)), breaks=k, labels=F)
+diags&lt;-NULL
+for(i in 1:k){
+  train&lt;-data[folds!=i,]
+  test&lt;-data[folds==i,]
+  truth&lt;-test$y
+  fit&lt;-glm(y~.,data=train, family =&quot;binomial&quot;)
+  probs&lt;-predict(fit,newdata=test,type=&quot;response&quot;)
+  diags&lt;-rbind(diags,class_diag(probs,truth))
+}</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>diags %&gt;% summarize_all(mean)</code></pre>
+<pre><code>##   acc sens spec  ppv       auc
+## 1 0.9 0.89  0.9 0.96 0.9333333</code></pre>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ ., family = &quot;binomial&quot;, data = train)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.66714  -0.00007   0.00000   0.03524   1.37388  
+## 
+## Coefficients:
+##                              Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                    0.8668    21.5871   0.040    0.968
+## beer_servings                 -0.2737     0.2636  -1.038    0.299
+## spirit_servings               -0.1224     0.2219  -0.551    0.581
+## wine_servings                 -0.1000     0.1633  -0.613    0.540
+## total_litres_of_pure_alcohol   7.1887    12.1908   0.590    0.555
+## total_serving_of_alcohollow    7.2946    20.7379   0.352    0.725
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 82.9108  on 59  degrees of freedom
+## Residual deviance:  7.5342  on 54  degrees of freedom
+## AIC: 19.534
+## 
+## Number of Fisher Scoring iterations: 12</code></pre>
+<pre class="r"><code>########################################################################LASSO
+library(glmnet)</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack</code></pre>
+<pre><code>## Loaded glmnet 4.0-2</code></pre>
+<pre class="r"><code>set.seed(1234)
+x&lt;- model.matrix(y~.+-1, data=dranks7)
+y&lt;- as.matrix(dranks7$y)
+cv&lt;-cv.glmnet(x,y,family=&quot;binomial&quot;)
+lasso&lt;-glmnet(x,y,family=&quot;binomial&quot;,lambda=cv$lambda.1se)
+coef(lasso)</code></pre>
+<pre><code>## 7 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                         s0
+## (Intercept)                   1.779014e+00
+## beer_servings                -8.429880e-03
+## spirit_servings               .           
+## wine_servings                 .           
+## total_litres_of_pure_alcohol  .           
+## total_serving_of_alcoholhigh -2.179692e+00
+## total_serving_of_alcohollow   3.470806e-14</code></pre>
+<pre class="r"><code>######################################################################### 10-fold CV on lasso variables
+set.seed(1234)
+k=10
+F&lt;-FALSE
+data &lt;- dranks7 %&gt;% sample_frac 
+folds &lt;- ntile(1:nrow(data),n=10) 
+diags&lt;-NULL
+for(i in 1:k){
+train &lt;- data[folds!=i,] 
+test &lt;- data[folds==i,] 
+truth &lt;- test$y 
+fit&lt;- glm(y~beer_servings+total_serving_of_alcohol,data=train, family=&quot;binomial&quot;) 
+probs &lt;- predict(fit, newdata=test, type=&quot;response&quot;)
+diags&lt;-rbind(diags,class_diag(probs,truth)) 
+}</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>summarize_all(diags,mean)</code></pre>
+<pre><code>##         acc sens      spec       ppv       auc
+## 1 0.9404762 0.98 0.8166667 0.9457143 0.9583333</code></pre>
+<p>Fit model, compute in-sample classification diagnostics (Accuracy, Sensitivity, Specificity, Precision, AUC), and interpret (5)
+<em>For the in sample classification diagnostics, the sensitivity is 1, the specificity is 0.9411765, the precision is 0.9428571, the AUC is 0.9910873, and the accuracy is 0.9701493.</em></p>
+<p>Perform 10-fold (or repeated random sub-sampling) CV with the same model and report average out-of-sample classification diagnostics (Accuracy, Sensitivity, Specificity, Precision, and AUC); interpret AUC and compare with the in-sample metrics (10)</p>
+<p><em>For the out of sample classification diagnostics, the sensitivity is 0.89, the specificity is 0.9, the precision is 0.96, the AUC is 0.9333333, and the accuracy is 0.9. This AUC value of 0.9333333 is smaller than the in-sample AUC of 0.9910873, which means there is overfitting. </em>
+###is it correct to say overfitting here!!!!!!</p>
+<p>Perform LASSO on the same model/variables. Choose lambda to give the simplest model whose accuracy is near that of the best (i.e., lambda.1se). Discuss which variables are retained. (5)
+<em>The variable that are retained are beer_servings and total_serving_of_alcohol.</em></p>
+<p>Perform 10-fold CV using only the variables lasso selected: compare model’s out-of-sample AUC to that of your logistic regressions above (5)
+<em>The AUC gathered from the 10 fold CV on the lasso selected variables is 0.9583333. In comparison to the in-sample AUC of 0.9910873 and the 10 fold CV (with the same model used for the in-sample AUC) AUC of 0.9333333, this model has an AUC that lies between the two but less than the in-sample AUC.</em>
+###is this sufficient</p>
+<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
+<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
+<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

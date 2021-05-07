@@ -1,0 +1,18 @@
+---
+title: My Post - R and Python
+author: 'Aryasb Shenavari'
+date: 2021-05-09
+slug: new
+categories: []
+tags: []
+description: ''
+---
+
+
+[Link to project 1](/project/project1/)
+
+[Link to project 2](/project/project2/)
+
+[Link to google](https://www.google.com)
+
+![](/post/2021-05-06-blog_files/CR7.png)
