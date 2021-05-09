@@ -15,7 +15,7 @@ description: ''
 
 [Link to google](https://www.google.com)
 
-![](/post/2021-05-06-blog_files/MU.png)!
+![](/post/2021-05-06-blog_files/MU.png)
 ```{R}
 x<-c(42, 41, 43, 44, 44, 44, 45, 45, 46, 46, 45, 46, 45, 45, 47, 48, 41, 48, 47, 47, 47, 49, 50)
 hist(x)

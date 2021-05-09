@@ -16,7 +16,6 @@
       <description> Link to project 1
 Link to project 2
 Link to google
-!
 x&amp;lt;-c(42, 41, 43, 44, 44, 44, 45, 45, 46, 46, 45, 46, 45, 45, 47, 48, 41, 48, 47, 47, 47, 49, 50) hist(x) y&amp;lt;-(&amp;quot;goodbye&amp;quot;) print(&amp;quot;stop!!!!&amp;quot;) ## stop!!!! 3+7 ## 10 z=&amp;quot;mister&amp;quot; print(r.y,z) ## goodbye mister </description>
     </item>
     

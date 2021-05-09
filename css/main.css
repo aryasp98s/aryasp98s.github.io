@@ -1,10 +1,10 @@
 /* Main page with stikky-footer */
 html, body {
   height: 100%;
-  background-color: #fff;
+  background-color: #f56356;
   font-family: 'Source Sans Pro', sans-serif;
   /* The html and body elements cannot have any padding or margin. */
-  border-top: 2px solid #f8971f;
+  border-top: 2px solid #f56356;
 }
 
 /* Wrapper for page content to push down footer */
@@ -23,17 +23,17 @@ html, body {
   margin-bottom: 10px;
 }
 .navbar-default {
-  background-color: #ffffff;
-  border-color: #ffffff;
+  background-color: #7ec6fc;
+  border-color: #1d1e1f;
 }
 .navbar-default .navbar-brand {
-  color: #6b6b6b;
+  color: #1d1e1f;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #6b6b6b;
+  color: #1d1e1f;
 }
 .navbar-default .navbar-text {
-  color: #6b6b6b;
+  color: #eb4034;
 }
 .navbar-default .navbar-nav > li > a {
   color: #6b6b6b;
@@ -43,11 +43,11 @@ html, body {
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
   color: #6b6b6b;
-  background-color: #ffffff;
+  background-color: #1d1e1f;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #6b6b6b;
-  background-color: #ffffff;
+  color: #34ebe8;
+  background-color: #34ebe8;
 }
 .navbar-default .navbar-toggle {
   border-color: #ffffff;
@@ -70,14 +70,14 @@ html, body {
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #6b6b6b;
+    color: #d7b3f2;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #6b6b6b;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #6b6b6b;
-    background-color: #ffffff;
+    color: #f2f4f5;
+    background-color: #1d1e1f;
   }
 }
 
@@ -91,10 +91,10 @@ html, body {
   margin: 20px 0;
 }
 .container a {
-  color: #f8971f;
+  color: #2986e3;
 }
 .container a:hover {
-  color: #bf5700;
+  color: #f2f4f5;
 }
 .container p img, .img-responsive {
   display: block;
@@ -116,10 +116,10 @@ html, body {
   font-size: 15px;
 }
 .panel-default h4 a, h5 a {
-  color: #f8971f;
+  color: #f2f4f5;
 }
 .panel-default h4 a:hover, h5 a:hover {
-  color: #bf5700;
+  color: #8209e6;
 }
 .panel{
   border-style: none;
@@ -189,7 +189,7 @@ html, body {
 	color: #6b6b6b;
 }
 div.footer{
-  border-bottom: 5px solid #f8971f;;
+  border-bottom: 5px solid #00aaff;;
 }
 /* Set the fixed height of the footer here */
 /*.footer {
