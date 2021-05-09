@@ -7,7 +7,7 @@
     <meta name="author" content="Aryasb Shenavari" />
     
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
-    <title>R Notebook</title>
+    <title>project2</title>
     <meta name="generator" content="Hugo 0.83.1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../css/main.css" />
@@ -54,7 +54,7 @@
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="../../project/project2/">R Notebook</a></strong>
+            <strong><a href="../../project/project2/">project2</a></strong>
           </h3>
         </div>
  
@@ -231,8 +231,7 @@ type1error </code></pre>
 <pre class="r"><code>bonferroni &lt;- 0.05/7
 bonferroni </code></pre>
 <pre><code>## [1] 0.007142857</code></pre>
-<p><em>A total of 7 tests were carried out. Specifically, one MANOVA, three ANOVAs, and 3 post-hoc T-tests. The probability of at least one type error (if unadjusted) is 0.3016627. The bonferroni correction adjusted the significance level to 0.007142857. Despite this change all seven tests had p-values below this significance level still and therefore it can still be concluded that significant difference does exist.</em>
-#Briefly discuss some of the MANOVA assumptions and whether or not they are likely to have been met here</p>
+<p><em>A total of 7 tests were carried out. Specifically, one MANOVA, three ANOVAs, and 3 post-hoc T-tests. The probability of at least one type error (if unadjusted) is 0.3016627. The bonferroni correction adjusted the significance level to 0.007142857. Despite this change all seven tests had p-values below this significance level still and therefore it can still be concluded that significant difference does exist. One of the many MANOVA assumptions is having random samples and independent observations, which is likely to have been met here. Additionally, another of the many MANOVA assumptions is to have Multivariate normality of DVs, and is likely to not have been met here.</em></p>
 <p>#2-RANDOMIZATION TEST: MEAN DIFFERENCE</p>
 <pre class="r"><code>#2-RANDOMIZATION TEST: MEAN DIFFERENCE
 dranks5 %&gt;% na.omit</code></pre>
@@ -342,6 +341,8 @@ summary(fit)</code></pre>
 geom_point()+geom_smooth(method=&quot;lm&quot;) + geom_vline(xintercept=mean(dranks4$total_litres_of_pure_alcohol_c,na.rm=T),lty=2)</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>summary(fit)$r.sq</code></pre>
+<pre><code>## [1] 0.6539997</code></pre>
 <pre class="r"><code>resid&lt;-fit$residuals
 fitvals&lt;-fit$fitted.values
 ggplot()+geom_point(aes(fitvals,resid))+geom_hline(yintercept=0, color=&#39;red&#39;)</code></pre>
@@ -350,17 +351,7 @@ ggplot()+geom_point(aes(fitvals,resid))+geom_hline(yintercept=0, color=&#39;red&
 <p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
 <pre class="r"><code>ggplot()+geom_qq(aes(sample=resid))+geom_qq_line(aes(sample=resid))</code></pre>
 <p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-4.png" width="672" />
-<em>The intercept means that the Mean/predicted percent of cousin marriage for countries that consume high total servings of alcohol per person and with zero total_litres_of_pure_alcohol_c per person consumed is 5.57986.</em></p>
-<p><em>total_litres_of_pure_alcohol_c means that for every 1-unit increase in total_litres_of_pure_alcohol_c, predicted percentage of cousin marriage goes down 0.90490 for this group.</em></p>
-<p><em>total_serving_of_alcohollow means that low total serving of alcohol countries with zero total_litres_of_pure_alcohol_c per person have predicted percentage of cousin marriage that is 31.95918 greater than countries with high total serving of alcohol per person with zero percentage of cousin marriage.</em></p>
-<p><em>total_litres_of_pure_alcohol_c:total_serving_of_alcohollow means that the slope of percentage of cousin marriage on total_litres_of_pure_alcohol_c for countries with low total serving of alcohol per person is 3.18395 greater than for countries with high total serving of alcohol per person. </em></p>
-<p>What proportion of the variation in the outcome does your model explain? (4)
-####ASK ABOUT THIS##########!!!!WHAT DOES THIS MEAN</p>
-<p>Check assumptions of linearity, normality, and homoskedasticity either graphically or using a hypothesis test (5)
-<em>The assumptions for normality, linearity, and homoskedasticity are not met, as shown by the graphs.</em>
-###are these correct?</p>
-<p>Regardless, recompute regression results with robust standard errors via coeftest(…, vcov=vcovHC(…)). Discuss significance of results, including any changes from before/after robust SEs if applicable.<em>The intercept and otal_litres_of_pure_alcohol_c are not signigicant as they have p-values above the significance level of 0.05. The total_serving_of_alcohollow and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow are signicant because they have p-values below the significance level of 0.05. The standard errors remained practically … what should I explain them </em>
-###what does it mean describe significant of resutls?</p>
+<em>The ‘intercept’ means that the Mean/predicted percent of cousin marriage for countries that consume high total servings of alcohol per person and with zero ‘total_litres_of_pure_alcohol_c’ per person consumed is 5.57986.’total_litres_of_pure_alcohol_c’ means that for every 1-unit increase in ‘total_litres_of_pure_alcohol_c’, predicted percentage of cousin marriage goes down 0.90490 for this group.’total_serving_of_alcohollow’ means that low total serving of alcohol countries with zero ‘total_litres_of_pure_alcohol_c’ per person have predicted percentage of cousin marriage that is 31.95918 greater than countries with high total serving of alcohol per person with zero percentage of cousin marriage.’total_litres_of_pure_alcohol_c:total_serving_of_alcohollow’ means that the slope of percentage of cousin marriage on ‘total_litres_of_pure_alcohol_c’ for countries with low total serving of alcohol per person is 3.18395 greater than for countries with high total serving of alcohol per person. The proportion of the variation in the outcome that the model explains is 0.6539997.The assumptions for normality and linearity are met, however homoskedasticity is not.Before the heteroskedasticity robust standard errors the p value for ‘total_litres_of_pure_alcohol_c’ (0.1968) was above the 0.05 threshold and therefore not statistically significant (accept the null hypothesis), and after the heteroskedasticity robust standard errors the p value (0.16814) was again above the 0.05 threshold and therefore not statistically significant (accept the null hypothesis). In other words there was no change in significance. Additionally, for ‘total_serving_of_alcohollow’ before the heteroskedasticity robust standard errors the p value for ‘total_serving_of_alcohollow’ (1.27e-09) was below the 0.05 threshold and therefore statistically significant (reject the null hypothesis), and after the heteroskedasticity robust standard errors the p value (7.117e-08) was again below the 0.05 threshold and therefore statistically significant (reject the null hypothesis). In other words there was no chnage in significance. The standard errors remained practically. Specifically, the original SEs were 2.8289, 0.6936, 4.4934, 1.2178 for the ‘intercept’, ‘total_litres_of_pure_alcohol_c’, ‘total_serving_of_alcohollow’, and ‘total_litres_of_pure_alcohol_c:total_serving_of_alcohollow’, relatively. The robust SEs were 3.02883, 0.64902, 5.23758, 1.28830 for the ‘intercept’, ‘total_litres_of_pure_alcohol_c’, ‘total_serving_of_alcohollow’, and ‘total_litres_of_pure_alcohol_c:total_serving_of_alcohollow’, relatively. From these results the standard errors changed from the original and robust SEs, but very little.</em></p>
 <p>#4-BOOTSTRAPPING</p>
 <pre class="r"><code>#4-BOOTSTRAPPING
 samp_distn &lt;- replicate(5000, {
@@ -373,9 +364,8 @@ samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd)</code></pre>
 ## 1    2.639237                       0.571453                    6.758927
 ##   total_litres_of_pure_alcohol_c:total_serving_of_alcohollow
 ## 1                                                   1.789869</code></pre>
-<p><em>The SEs in this case were 2.692461, 0.5782093, 6.883675, 1.795046 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The original SEs were 2.8289, 0.6936, 4.4934, 1.2178 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The robust SEs were 3.02883, 0.64902, 5.23758, 1.28830 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. From these results the standard errors changed from the original and robust SEs, but very little. </em></p>
-<p>#how do u describe p-values when I don’t have any for bootstrapping. do I just explain how SE differ from robust ones above?!!!!!
-Discuss any changes you observe in SEs and p-values using these SEs compared to the original SEs and the robust SEs)</p>
+<p><em>The SEs in this case were 2.692461, 0.5782093, 6.883675, 1.795046 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The original SEs were 2.8289, 0.6936, 4.4934, 1.2178 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. The robust SEs were 3.02883, 0.64902, 5.23758, 1.28830 for the intercept, total_litres_of_pure_alcohol_c, total_serving_of_alcohollow, and total_litres_of_pure_alcohol_c:total_serving_of_alcohollow, relatively. From these results the standard errors changed from the original SEs, robust SEs, to these bootstrapped SEs but very little. There was no change in significance in total_litres_of_pure_alcohol_c (which was not statistically significant) before and after the heteroskedasticity robust standard errors, and there was no change in significance in total_serving_of_alcohollow (which was statistically significant) before and after the heteroskedasticity robust standard errors. Because the bootstrapped standard error for total_litres_of_pure_alcohol_c is less than both the original standard error and the robust standard error for total_litres_of_pure_alcohol_c it can be determined that the bootrapped p-value for total_litres_of_pure_alcohol_c is less than both the original p-value and robust p-value for total_litres_of_pure_alcohol_c. Additionally, because the bootstrapped standard error for total_serving_of_alcohollow is greater than both the original standard error and the robust standard error for total_serving_of_alcohollow it can be determined that the bootrapped p-value for total_serving_of_alcohollow is higher than both the original p-value and robust p-value for total_serving_of_alcohollow. </em></p>
+<p>#5-LOGISTIC REGRESSION FROM TWO EXPLANATORY VARIABLES</p>
 <pre class="r"><code>#5
 library(ggplot2)
 library(plotROC)
@@ -454,14 +444,9 @@ precisison </code></pre>
 <pre><code>## [1] 0.7837838</code></pre>
 <pre class="r"><code>dranks6$logit&lt;-predict(ogdranks, type=&quot;link&quot;)
 dranks6 %&gt;% mutate(y=as.factor(y)) %&gt;% ggplot()+geom_density(aes(logit, color=y, fill=y), alpha=.4)+geom_vline(xintercept = 0)+xlab(&quot;logit&quot;)</code></pre>
-<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<p>Interpret coefficient estimates in context (10)
-<em>The coefficients are intercept, total_litres_of_pure_alcohol, and wine_servings. The intercept value of 10.8187916 means that the odds of high cousin marriage are 10.8187916 when the height is zero the predicted percentage of cousin marriage per country </em>
-###FOR SURE ASK THIS!!!!!</p>
-<p>Compute and discuss the Accuracy, Sensitivity (TPR), Specificity (TNR), Precision (PPV), and AUC of your model (5)
-<em>The sensitivity is 0.8787879 , the specificity is 0.7647059, the precision is 0.7837838, the AUC is 0.9273619 , and the accuracy is 0.8208955. </em></p>
-<p>Generate an ROC curve (plot) and calculate AUC (either manually or with a package); interpret (5)
-<em>The AUC is 0.9273619, which is a high value for AUC. AUC is the the area under the ROC curve. This high AUC value means that the model is very good at distinguishing between countries of high and low cousin marriage percentages. </em></p>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-2.png" width="672" />
+<em>The coefficients are ‘intercept’, ‘total_litres_of_pure_alcohol’, and ‘wine_servings’. The intercept value of 10.8187916 means that the odds of high cousin marriage are 10.8187916 when the ‘total_litres_of_pure_alcohol’ and ‘wine_servings’ consumed by a country is zero the predicted percentage of cousin marriage per country. The ‘total_litres_of_pure_alcohol’ value of 0.5869573 means that the odds of being high cousin marriage are 10.8187916 times 0.5869573 to the power of whatever ‘total_litres_of_pure_alcohol’ value (odds of high cousin marriage = 10.8187916 X 0.5869573^total_litres_of_pure_alcohol). The ‘wine_servings’ value of 0.9795759 means that the odds of being high cousin marriage are 10.8187916 times 0.9795759 to the power of whatever ‘wine_servings’ value (odds of high cousin marriage =10.8187916 X 0.9795759^wine_servings). If there are values for both ‘wine_servings’ and ‘total_litres_of_pure_alcohol’, then the odds of high cousin marriage is 10.8187916 times 0.9795759 to the power of whatever ‘wine_servings’ value times 0.5869573 to the power of whatever ‘total_litres_of_pure_alcohol’ value (odds of high cousin marriage = 10.8187916 X 0.5869573^total_litres_of_pure_alcohol X 0.9795759^wine_servings). The sensitivity is 0.8787879 , the specificity is 0.7647059, the precision is 0.7837838, the AUC is 0.9273619 , and the accuracy is 0.8208955. The AUC is 0.9273619, which is a high value for AUC. AUC is the the area under the ROC curve. This high AUC value means that the model is very good at distinguishing between countries of high and low cousin marriage percentages.</em></p>
+<p>#6-LOGISTIC REGRESSION FROM ALL VARIABLES; CV-10 FOLD; LASSO; CV-10 FOLD ON LASSO VARIABLES</p>
 <pre class="r"><code>#6
 class_diag &lt;- function(probs,truth){ 
   #CONFUSION MATRIX: CALCULATE ACCURACY, TPR, TNR, PPV 
@@ -625,19 +610,7 @@ diags&lt;-rbind(diags,class_diag(probs,truth))
 <pre class="r"><code>summarize_all(diags,mean)</code></pre>
 <pre><code>##         acc sens      spec       ppv       auc
 ## 1 0.9404762 0.98 0.8166667 0.9457143 0.9583333</code></pre>
-<p>Fit model, compute in-sample classification diagnostics (Accuracy, Sensitivity, Specificity, Precision, AUC), and interpret (5)
-<em>For the in sample classification diagnostics, the sensitivity is 1, the specificity is 0.9411765, the precision is 0.9428571, the AUC is 0.9910873, and the accuracy is 0.9701493.</em></p>
-<p>Perform 10-fold (or repeated random sub-sampling) CV with the same model and report average out-of-sample classification diagnostics (Accuracy, Sensitivity, Specificity, Precision, and AUC); interpret AUC and compare with the in-sample metrics (10)</p>
-<p><em>For the out of sample classification diagnostics, the sensitivity is 0.89, the specificity is 0.9, the precision is 0.96, the AUC is 0.9333333, and the accuracy is 0.9. This AUC value of 0.9333333 is smaller than the in-sample AUC of 0.9910873, which means there is overfitting. </em>
-###is it correct to say overfitting here!!!!!!</p>
-<p>Perform LASSO on the same model/variables. Choose lambda to give the simplest model whose accuracy is near that of the best (i.e., lambda.1se). Discuss which variables are retained. (5)
-<em>The variable that are retained are beer_servings and total_serving_of_alcohol.</em></p>
-<p>Perform 10-fold CV using only the variables lasso selected: compare model’s out-of-sample AUC to that of your logistic regressions above (5)
-<em>The AUC gathered from the 10 fold CV on the lasso selected variables is 0.9583333. In comparison to the in-sample AUC of 0.9910873 and the 10 fold CV (with the same model used for the in-sample AUC) AUC of 0.9333333, this model has an AUC that lies between the two but less than the in-sample AUC.</em>
-###is this sufficient</p>
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
+<p><em>For the in sample classification diagnostics, the sensitivity is 1, the specificity is 0.9411765, the precision is 0.9428571, the AUC is 0.9910873, and the accuracy is 0.9701493.For the out of sample classification diagnostics, the sensitivity is 0.89, the specificity is 0.9, the precision is 0.96, the AUC is 0.9333333, and the accuracy is 0.9. This AUC value of 0.9333333 is smaller than the in-sample AUC of 0.9910873, but is still a high AUC. This high AUC means that this a good model that is very good at distinguishing between countries of high and low cousin marriage percentages. The variables that are retained are beer_servings and total_serving_of_alcohol. The AUC gathered from the 10 fold CV on the lasso selected variables is 0.9583333. In comparison to the in-sample AUC of 0.9910873 and the 10 fold CV (with the same model used for the in-sample AUC) AUC of 0.9333333, this model has an AUC that lies between the two but less than the in-sample AUC. The AUC is till high which again means that this a good model. </em></p>
 
             
         <hr>         <div class="related-posts">
